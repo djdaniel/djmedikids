@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="persistencia.mybatis.mapper.EmpleadoMapper">
+
+    <resultMap type="empleado" id="rmEmpleadoBusqueda">
+   		<id column="ID_EMPLE" property="codigo"/>
+        <result column="NOM_EMP" property="nombre"/> 
+        <result column="EMP_APEPAT" property="apellido"/> 
+  </resultMap>
+   
+   <resultMap type="empleado" id="rmEmpleadoByPK">
+   		<id column="ID_EMPLE" property="codigo"/>
+        <result column="NOM_EMP" property="nombre"/> 
+        <result column="EMP_APEPAT" property="apellido"/>
+        <result column="EMP_APEMAT" property="genero"/> 
+        <result column="EMP_FONO" property="genero"/> 
+        <result column="EMP_DIR" property="genero"/> 
+        <result column="EMP_EMAIL" property="genero"/> 
+        <result column="EMP_SEXO" property="genero"/> 
+        <result column="EMP_SUELDO" property="genero"/>   
+        <result column="EMP_CV" property="genero"/>  
+        <association property="distrito" javaType="distrito">
+      	  <result column="ID_DISTRITO" property="codigo"/>
+        </association>
+        <association property="cargo" javaType="cargo">
+      	  <result column="ID_CARG" property="codigo"/>
+        </association> 
+        <association property="estado" javaType="estado">
+      	  <result column="ID_ESTADO" property="codigo"/>
+        </association>  
+  </resultMap>
+  
+   <select id="buscar" resultMap="rmEmpleadoBusqueda" parameterType="empleado">
+  		 SELECT ID_EMPLE, NOM_EMP, EMP_APEPAT
+   		 FROM TB_EMPLEADO
+   		 WHERE NOM_EMP LIKE #{nombre}
+  </select>
+   <select id="obtener" resultMap="rmEmpleadoByPK" parameterType="integer">
+  			SELECT ID_EMPLE, NOM_EMP, EMP_APEPAT, EMP_APEMAT, EMP_FONO, ID_DISTRITO, 
+		    EMP_DIR, EMP_EMAIL, EMP_SEXO, EMP_SUELDO, ID_CARG, EMP_CV, ID_ESTADO 
+			FROM TB_EMPLEADO
+			WHERE ID_EMPLE=#{codigo}
+  </select>
+  
+  <insert id="insertar" parameterType="empleado">
+   			INSERT INTO TB_EMPLEADO(NOM_EMP,EMP_APEPAT,EMP_APEMAT,EMP_FONO,ID_DISTRITO,EMP_DIR,EMP_EMAIL,EMP_SEXO,EMP_SUELDO,ID_CARG,EMP_CV,ID_ESTADO)
+			values(#{nombre},#{apellido},#{apellidomat},#{telefono},#{distrito.codigo},#{direccion},#{email},#{genero},#{sueldo},#{cargo.codigo},#{cv},#{estado.codigo})
+  </insert>
+  
+  <delete id="eliminar" parameterType="integer">
+ 	 DELETE FROM TB_EMPLEADO WHERE ID_EMPLE=#{id}
+  </delete>
+  
+     <update id="actualizar" parameterType="empleado">
+  	 		UPDATE TB_EMPLEADO
+   			SET NOM_EMP=#{nombre}, 
+   			EMP_APEPAT=#{apellido},
+   			EMP_APEMAT=#{apellidomat},
+		    EMP_FONO=#{telefono},
+		    ID_DISTRITO=#{distrito.codigo},
+		    EMP_DIR=#{direccion},
+		    EMP_EMAIL=#{email},
+		    EMP_SEXO=#{genero},
+		    EMP_SUELDO=#{sueldo},
+		    ID_CARG=#{cargo.codigo},
+		    EMP_CV=#{cv},
+		    ID_ESTADO=#{estado.codigo} 
+		    WHERE ID_EMPLE=#{codigo}  
+		    
+  </update>
+</mapper>

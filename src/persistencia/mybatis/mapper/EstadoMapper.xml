@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="persistencia.mybatis.mapper.EstadoMapper">
+
+    
+   <resultMap type="estado" id="rmEstados">
+   		<id column="id_estado" property="codigo"  />
+   		<result column="nom_estado" property="descripcion"  />
+   </resultMap>
+   
+   <select id="getEstados" resultMap="rmEstados">
+   		SELECT ID_ESTADO, NOM_ESTADO FROM TB_ESTADO
+   </select>
+    
+</mapper>

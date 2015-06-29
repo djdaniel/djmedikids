@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="persistencia.mybatis.mapper.UsuarioMapper">
+
+ 
+   <select id="getNombreUsuario" resultType="string" parameterType="usuario">
+  		 SELECT nom_usuario
+			FROM TB_USUARIO
+			WHERE USUARIO=#{cuenta}
+			AND PASSWORD=#{contrasena}
+   </select>
+    
+</mapper>

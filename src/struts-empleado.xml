@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="struts-empleado" extends="demo" namespace="/empleado">	 
+	
+		<action name="inicializarEmpleado" >
+		<interceptor-ref name="i18nStack" />
+			<result type="tiles">d_listadoEmpleado</result> 
+			<!-- <result type="tiles" name="input">d_listadoEmpleado</result> -->
+		</action>
+
+		  <action name="nuevoEmpleado" class="action.EmpleadoAction"  >
+<interceptor-ref name="i18nStack" />
+			<result type="tiles">d_edicionEmpleado</result>
+		</action>  
+		
+		 <action name="buscarEmpleado" class="action.EmpleadoAction"
+			method="buscar">
+			<result type="tiles">d_listadoEmpleado</result>
+			<result name="input" type="tiles">d_listadoEmpleado</result>
+		</action>
+ 	<action name="cargarEmpleado" class="action.EmpleadoAction"> 
+ 		  <interceptor-ref name="pitParamsPrepareParamsStack" />
+			<result type="tiles">d_edicionEmpleado</result>
+		</action> 
+ 		   
+ 		   <action name="editarEmpleado" class="action.EmpleadoAction"
+			method="editar">
+			<result type="tiles">d_listadoEmpleado</result>
+			<result name="input" type="tiles">d_edicionEmpleado</result>
+		</action> 
+ 		     
+		<action name="eliminarEmpleado" class="action.EmpleadoAction"
+			method="eliminar">
+			<result type="tiles">d_listadoEmpleado</result>
+		</action>
+ 		
+	</package>
+</struts>

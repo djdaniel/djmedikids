@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="persistencia.mybatis.mapper.DistritoMapper">
+
+   <resultMap type="distrito" id="rmDistritos">
+   		<id column="ID_DISTRITO" property="codigo"  />
+   		<result column="NOM_DISTRITO" property="descripcion"  />
+   </resultMap>
+   
+   <select id="getDistritos" resultMap="rmDistritos">
+   		SELECT ID_DISTRITO, NOM_DISTRITO FROM TB_DISTRITO
+   </select>
+    
+    
+</mapper>
